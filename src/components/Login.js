@@ -27,7 +27,7 @@ const Login = (props) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("username", res.data.username);
         localStorage.setItem("password", res.data.password);
-        props.history.push("")
+        props.history.push("/protected")
       })
       .catch(err => {
         setCredentials({...credentials, error: "Your username or password is incorect."})

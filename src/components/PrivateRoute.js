@@ -1,21 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 //Task List:
 //1. Build a PrivateRoute component that redirects if user is not logged in
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    return (
-        <Route
-            {...rest}
-            render={(props) => {
-                if (localStorage.getItem("token")) {
-                    return <Component {...props} />;
-                } else {
-                    return <Redirect to="/login" />;
-                }
-            }}
-        />
-    );
+  return (
+    <Route
+    {...rest}
+    render={(props) => {
+      console.log(localStorage.getItem("token"))
+      if (localStorage.getItem("token") !== undefined) {
+          return <Component {...props} />;
+        } else {
+          return <Redirect to="/login" />;
+        }
+      }}
+    />
+  );
 };
 
 export default PrivateRoute;
