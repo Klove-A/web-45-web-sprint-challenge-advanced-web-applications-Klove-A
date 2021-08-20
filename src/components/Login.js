@@ -1,49 +1,60 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import axiosWithAuth from "../helpers/axiosWithAuth";
+
 const initialFormValues = {
   username: "",
-  password: ""
+  password: "",
+  error: ""
 };
 
-const Login = () => {
-  const { credentials, setCredentials } = useState(initialFormValues)
+const Login = (props) => {
+  const [ credentials, setCredentials ] = useState(initialFormValues);
 
   const handleChange = e => {
-    setCredentials(username, password)
+    setCredentials({...credentials, [e.target.name]: e.target.value})
+    console.log("Login handleChange", credentials)
   }
   
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-  // const login = e => {
-  //   e.preventDefault("http://localhost:5000/api/login", credentials);
-  //   axios.post("")
-  //     .then(res => {
 
-  //     })
-  // };
+  const handleSubmit = e => {
+    e.preventDefault();
+    axiosWithAuth().post("/login", credentials)
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("username", res.data.username);
+        localStorage.setItem("password", res.data.password);
+        props.history.push("")
+      })
+      .catch(err => {
+        setCredentials({...credentials, error: "Your username or password is incorect."})
+      })
+  };
 
-  const error = "";
+  const { error } = credentials;
   //replace with error state
 
   return (
     <div>
       <h1>Welcome to the Bubble App!</h1>
       <div data-testid="loginForm" className="login-form">
-        <form >
+        <form onSubmit={handleSubmit}>
           <input
             id="username"
             type="text"
             name="username"
-            value={username}
-            onChange={handleChange()}
+            value={credentials.username}
+            onChange={handleChange}
           />
           <input
             id="password"
             type="password"
             name="password"
-            value={password}
-            onChange={handleChange()}
+            value={credentials.password}
+            onChange={handleChange}
           />
           <button id="submit">Log in</button>
         </form>
