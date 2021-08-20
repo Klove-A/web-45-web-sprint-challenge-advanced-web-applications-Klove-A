@@ -13,10 +13,9 @@ const fetchColorService = () => {
         // });
         // console.log(typeof(x));
         // return (x);
-        axiosWithAuth().get("/colors")
+        return axiosWithAuth().get("/colors")
             .then(res => {
-                console.log(res);
-                return res;
+                return res.data;
             }).catch((err) => {
                 console.log('error caught')
                 console.log(err)

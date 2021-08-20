@@ -6,6 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import BubblePage from "./components/BubblePage";
 import axiosWithAuth from "./helpers/axiosWithAuth";
 import "./styles.scss";
+import Bubbles from "./components/Bubbles";
 
 function App() {
 
@@ -28,9 +29,9 @@ function App() {
           <a onClick={handleLogout} data-testid="logoutButton" href='/login'>logout</a>
         </header>
         <Switch>
-          <PrivateRoute path="/protected" component={BubblePage}/>
+          <PrivateRoute path="/protected" component={Bubbles}/>
           <Route path="/login" component={Login} />
-          <Route path="/" component={Login} />
+          <Route component={Login} />
         </Switch>
       </div>
     </Router>

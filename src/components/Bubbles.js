@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Pack } from "@potion/layout";
 import { Svg, Circle } from "@potion/element";
+import fetchColorService from "../services/fetchColorService";
 
-const Bubbles = ({ colors }) => {
+const Bubbles = () => {
+  const colors = [];
+
   const [bubbleData, setBubbleData] = useState([]);
-  
+  useEffect(async () => {
+    const newColors = await fetchColorService()
+    console.log('ffffffffffffffffff')
+    console.log(newColors)
+    colors.push(...newColors)
+  },[]);
   useEffect(() => {
     const generateBubbleData = colors.map((_, i) => ({
       value: Math.floor(Math.random() * (colors.length * 2)) + 1,

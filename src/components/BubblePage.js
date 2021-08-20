@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
-import fetchColorService from '../services/fetchColorService';
+// import fetchColorService from '../services/fetchColorService';
 import axiosWithAuth from "../helpers/axiosWithAuth";
 
 const BubblePage = () => {
@@ -15,15 +15,15 @@ const BubblePage = () => {
   // }, []);
 
   useEffect(() => {
-    // axiosWithAuth().post("/colors")
-      // .then(res => {
-      //   setColors(...colors, fetchColorService.data)
-      //   console.log(colors)
-      // })
-      // .catch(err => {
-      //   console.log(err)
-      // })
-      fetchColorService()
+    axiosWithAuth().post("/colors")
+      .then(res => {
+        setColors(...colors)
+        console.log('colors');
+        console.log(colors)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }, []);
 
   const toggleEdit = (value) => {

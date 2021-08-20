@@ -24,9 +24,9 @@ const Login = (props) => {
     e.preventDefault();
     axiosWithAuth().post("/login", credentials)
       .then(res => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("username", res.data.username);
-        localStorage.setItem("password", res.data.password);
+        // console.log(res.data);
+        localStorage.setItem("token", res.data.payload);
+        // console.log(localStorage.getItem("token"));
         props.history.push("/protected")
       })
       .catch(err => {
