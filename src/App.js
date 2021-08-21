@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
@@ -29,7 +29,7 @@ function App() {
           <a onClick={handleLogout} data-testid="logoutButton" href='/login'>logout</a>
         </header>
         <Switch>
-          <PrivateRoute path="/protected" component={Bubbles}/>
+          <PrivateRoute path="/protected" component={BubblePage}/>
           <Route path="/login" component={Login} />
           <Route component={Login} />
         </Switch>
